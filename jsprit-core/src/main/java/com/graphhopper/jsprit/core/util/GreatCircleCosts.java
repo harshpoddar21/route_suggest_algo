@@ -61,6 +61,20 @@ public class GreatCircleCosts extends AbstractForwardVehicleRoutingTransportCost
     }
 
 
+    public GreatCircleCosts(DistanceUnit distanceUnit,double speed) {
+        super();
+        this.distanceUnit = distanceUnit;
+        this.speed=speed;
+    }
+
+
+    public GreatCircleCosts(DistanceUnit distanceUnit,double speed,double detour) {
+        super();
+        this.distanceUnit = distanceUnit;
+        this.speed=speed;
+        this.detour=detour;
+    }
+
     @Override
     public double getTransportCost(Location from, Location to, double time, Driver driver, Vehicle vehicle) {
         double distance;

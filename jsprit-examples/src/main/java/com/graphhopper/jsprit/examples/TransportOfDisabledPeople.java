@@ -26,8 +26,7 @@ import com.graphhopper.jsprit.core.algorithm.termination.IterationWithoutImprove
 import com.graphhopper.jsprit.core.problem.Location;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem.FleetSize;
-import com.graphhopper.jsprit.core.problem.constraint.ConstraintManager;
-import com.graphhopper.jsprit.core.problem.constraint.HardRouteConstraint;
+import com.graphhopper.jsprit.core.problem.constraint.*;
 import com.graphhopper.jsprit.core.problem.job.Shipment;
 import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
@@ -144,6 +143,7 @@ public class TransportOfDisabledPeople {
          *
 		 * wheelchair-bus can only pickup passenger where x<15
 		 */
+
         HardRouteConstraint wheelchair_bus_passenger_pickup_constraint = new HardRouteConstraint() {
 
             @Override
