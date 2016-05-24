@@ -230,7 +230,7 @@ public class RouteSuggestion {
         };
         VehicleRoutingAlgorithmBuilder vraBuilder = new VehicleRoutingAlgorithmBuilder(vrp, "/var/www/java/jsprit/jsprit-examples/input/algorithmConfigRouteSuggestion.xml");
         vraBuilder.addCoreConstraints();
-        vraBuilder.setNuOfThreads(8);
+        vraBuilder.setNuOfThreads(17);
         vraBuilder.addDefaultCostCalculators();
         StateManager stateManager = new StateManager(vrp);
         vraBuilder.setObjectiveFunction(new RouteSuggestionCustomCostCalculator(stateManager).createCalculator());
