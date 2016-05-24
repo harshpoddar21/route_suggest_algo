@@ -24,6 +24,7 @@ import com.graphhopper.jsprit.core.algorithm.recreate.listener.BeforeJobInsertio
 import com.graphhopper.jsprit.core.algorithm.recreate.listener.InsertionEndsListener;
 import com.graphhopper.jsprit.core.algorithm.recreate.listener.InsertionStartsListener;
 import com.graphhopper.jsprit.core.algorithm.ruin.listener.RuinListener;
+import com.graphhopper.jsprit.core.algorithm.selector.SelectBest;
 import com.graphhopper.jsprit.core.problem.AbstractActivity;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 import com.graphhopper.jsprit.core.problem.job.Delivery;
@@ -35,6 +36,7 @@ import com.graphhopper.jsprit.core.problem.solution.route.VehicleRoute;
 import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
 import com.graphhopper.jsprit.core.problem.vehicle.VehicleImpl;
+import com.graphhopper.jsprit.core.reporting.SolutionPrinter;
 import com.graphhopper.jsprit.core.util.Coordinate;
 import com.graphhopper.jsprit.core.util.Solutions;
 import org.graphstream.graph.Edge;
@@ -43,9 +45,7 @@ import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.stream.file.FileSinkDGS;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Collection;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
@@ -292,6 +292,34 @@ public class AlgorithmEventsRecorder implements RuinListener, IterationStartsLis
     @Override
     public void informIterationStarts(int i, VehicleRoutingProblem problem, Collection<VehicleRoutingProblemSolution> solutions) {
         currentIteration = i;
+        StringBuilder stringBuilder=new StringBuilder();
+        stringBuilder.append("iteration "+i);
+        stringBuilder.append("\r\n");
+        for (VehicleRoutingProblemSolution sol:solutions){
+
+            stringBuilder.append("===found solution with cost "+sol.getCost());
+            for (VehicleRoute route:sol.getRoutes()){
+                stringBuilder.append(" | ");
+                for (Job job:route.getTourActivities().getJobs()) {
+                    stringBuilder.append(job.getId()+",");
+                }
+                stringBuilder.append(" | ");
+            }
+            stringBuilder.append("finished===\r\n");
+
+        }
+        stringBuilder.append("\r\n");
+
+        try {
+
+            PrintWriter writer= new PrintWriter(new FileOutputStream(new File("/var/www/java/jsprit/iteration.txt"),true));
+            writer.append(stringBuilder.toString());
+            writer.close();
+        }catch (FileNotFoundException e){
+
+        }
+
+
     }
 
     private void initialiseGraph(VehicleRoutingProblem problem) {

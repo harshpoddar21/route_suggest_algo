@@ -1,6 +1,7 @@
 package com.graphhopper.jsprit.core.algorithm;
 
 import com.graphhopper.jsprit.core.algorithm.state.InternalStates;
+import com.graphhopper.jsprit.core.problem.job.Job;
 import com.graphhopper.jsprit.core.problem.solution.SolutionCostCalculator;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
 import com.graphhopper.jsprit.core.problem.solution.route.VehicleRoute;
@@ -9,6 +10,11 @@ import com.graphhopper.jsprit.core.problem.solution.route.state.RouteAndActivity
 import com.graphhopper.jsprit.core.problem.vehicle.Vehicle;
 import com.graphhopper.jsprit.core.util.DistanceUnit;
 import com.graphhopper.jsprit.core.util.GreatCircleCosts;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 
 /**
  * Created by root on 20/5/16.
@@ -30,14 +36,34 @@ public class RouteSuggestionCustomCostCalculator {
             @Override
             public double getCosts(VehicleRoutingProblemSolution solution) {
                 double c = 0.0;
+                StringBuilder stringBuilder=new StringBuilder();
+                stringBuilder.append("\r\n trying for solution ");
                 for (VehicleRoute r : solution.getRoutes()) {
+                    stringBuilder.append(" | ");
+                    for (Job job:r.getTourActivities().getJobs()){
+
+                        stringBuilder.append(","+job.getId()+",");
+                    }
+                    stringBuilder.append(" | ");
                     c += stateManager.getRouteState(r, InternalStates.COSTS, Double.class);
                     c += getFixedCosts(r.getVehicle());
                     c-=getRevenue(r);
                 }
 
+
+                stringBuilder.append(" | cost is  "+c);
+
                 //c += solution.getUnassignedJobs().size() * c * .1;
+                try {
+
+                    PrintWriter writer= new PrintWriter(new FileOutputStream(new File("/var/www/java/jsprit/cost_iteration.txt"),true));
+                    writer.append(stringBuilder.toString());
+                    writer.close();
+                }catch (FileNotFoundException e){
+
+                }
                 return c;
+
             }
 
             private double getRevenue(VehicleRoute vehicleRoute){

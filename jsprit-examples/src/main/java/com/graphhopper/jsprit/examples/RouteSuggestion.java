@@ -16,6 +16,7 @@
  ******************************************************************************/
 package com.graphhopper.jsprit.examples;
 
+import com.graphhopper.jsprit.analysis.toolbox.AlgorithmEventsRecorder;
 import com.graphhopper.jsprit.analysis.toolbox.AlgorithmSearchProgressChartListener;
 import com.graphhopper.jsprit.analysis.toolbox.GraphStreamViewer;
 import com.graphhopper.jsprit.analysis.toolbox.GraphStreamViewer.Label;
@@ -26,20 +27,30 @@ import com.graphhopper.jsprit.core.algorithm.VehicleRoutingAlgorithmBuilder;
 import com.graphhopper.jsprit.core.algorithm.io.VehicleRoutingAlgorithms;
 import com.graphhopper.jsprit.core.algorithm.selector.SelectBest;
 import com.graphhopper.jsprit.core.algorithm.state.StateManager;
+import com.graphhopper.jsprit.core.problem.Location;
 import com.graphhopper.jsprit.core.problem.VehicleRoutingProblem;
 import com.graphhopper.jsprit.core.problem.constraint.ConstraintManager;
 import com.graphhopper.jsprit.core.problem.constraint.HardActivityConstraint;
 import com.graphhopper.jsprit.core.problem.constraint.SwitchNotFeasible;
 import com.graphhopper.jsprit.core.problem.io.VrpXMLReader;
+import com.graphhopper.jsprit.core.problem.job.Job;
+import com.graphhopper.jsprit.core.problem.job.Pickup;
 import com.graphhopper.jsprit.core.problem.misc.JobInsertionContext;
 import com.graphhopper.jsprit.core.problem.solution.VehicleRoutingProblemSolution;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.End;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.PickupService;
+import com.graphhopper.jsprit.core.problem.solution.route.activity.Start;
 import com.graphhopper.jsprit.core.problem.solution.route.activity.TourActivity;
 import com.graphhopper.jsprit.core.reporting.SolutionPrinter;
 import com.graphhopper.jsprit.core.util.DistanceUnit;
 import com.graphhopper.jsprit.core.util.GreatCircleCosts;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 
 public class RouteSuggestion {
@@ -90,6 +101,113 @@ public class RouteSuggestion {
             @Override
             public ConstraintsStatus fulfilled(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime) {
 
+
+                StringBuilder stringBuilder=new StringBuilder();
+                stringBuilder.append("trying route ");
+
+                for (Job job:iFacts.getRoute().getTourActivities().getJobs()){
+
+                    stringBuilder.append("--"+job.getId()+"--");
+                }
+                if (prevAct instanceof PickupService) {
+                    stringBuilder.append("inserting " + iFacts.getJob().getId() + " between " + ((PickupService) prevAct).getJob().getId());
+                }
+                if (prevAct instanceof Start){
+
+                    stringBuilder.append("inserting " + iFacts.getJob().getId() + " between "+((Start)prevAct).getLocation().getId());
+                }
+                if (nextAct instanceof PickupService){
+
+                    stringBuilder.append(" and "+((PickupService) nextAct).getJob().getId());
+                }
+                if (nextAct instanceof End){
+
+                    stringBuilder.append(" and "+((End)nextAct).getLocation().getId());
+                }
+                   // System.out.println(stringBuilder.toString());
+
+
+                List<TourActivity> activityList=iFacts.getRoute().getActivities();
+                double totalTimeTaken=0;
+
+                double detourTime=findDetourTime(prevAct,newAct,nextAct);
+
+                for (int i=0;i<activityList.size();i++){
+
+
+                    double actualTimeTaken=findActualTimeTakenForActivity(activityList.get(i),activityList,iFacts.getRoute().getEnd().getLocation());
+
+                    double directTimeTaken=findTimeTakenToComplete(activityList.get(i),iFacts.getRoute().getEnd().getLocation());
+                    if (actualTimeTaken+detourTime-directTimeTaken>900){
+
+                        return ConstraintsStatus.NOT_FULFILLED_BREAK;
+                    }
+                    if (activityList.get(i)==prevAct){
+
+                        break;
+                    }
+
+
+
+
+                }
+
+
+                return ConstraintsStatus.FULFILLED;
+            }
+
+            private double findActualTimeTakenForActivity(TourActivity activity, List<TourActivity> activityList, Location endLocation) {
+
+                boolean isAfterAc=false;
+
+                double timeTaken=0;
+
+                for (int i=0;i<activityList.size();i++){
+
+                    if (activityList.get(i)==activity){
+
+                        isAfterAc=true;
+                        continue;
+                    }else if (isAfterAc){
+
+                        timeTaken+=findTimeTakenBetween(activityList.get(i).getLocation(),activityList.get(i-1).getLocation());
+
+                    }
+
+                }
+                timeTaken+=findTimeTakenToComplete(activityList.get(activityList.size()-1),endLocation);
+                return timeTaken;
+            }
+
+            public double findTimeTakenToComplete(TourActivity activity,Location endLocation){
+                GreatCircleCosts greatCircleCosts=new GreatCircleCosts(DistanceUnit.Meter,5,1.6);
+                double timeDirect=greatCircleCosts.getTransportTime(activity.getLocation(),endLocation,0,null,null);
+                return timeDirect;
+
+            }
+
+            public double findTimeTakenBetween(Location startLocation,Location endLocation){
+                GreatCircleCosts greatCircleCosts=new GreatCircleCosts(DistanceUnit.Meter,5,1.6);
+                double timeDirect=greatCircleCosts.getTransportTime(startLocation,endLocation,0,null,null);
+                return timeDirect;
+
+            }
+
+
+            public double findDetourTime(TourActivity prevAct, TourActivity newAct, TourActivity nextAct){
+
+                GreatCircleCosts greatCircleCosts=new GreatCircleCosts(DistanceUnit.Meter,5,1.6);
+                double timeDirect=greatCircleCosts.getTransportTime(prevAct.getLocation(),nextAct.getLocation(),0,null,null);
+                double timeVia=greatCircleCosts.getTransportTime(prevAct.getLocation(),newAct.getLocation(),0,null,null)+greatCircleCosts.getTransportTime(newAct.getLocation(),nextAct.getLocation(),0,null,null);
+                return timeVia-timeDirect;
+
+
+            }
+        };
+        HardActivityConstraint hardActivityConstraint2=new HardActivityConstraint() {
+            @Override
+            public ConstraintsStatus fulfilled(JobInsertionContext iFacts, TourActivity prevAct, TourActivity newAct, TourActivity nextAct, double prevActDepTime) {
+
                 double detourTime=findDetourTime(prevAct,newAct,nextAct);
 
                 if (detourTime>900){
@@ -128,8 +246,9 @@ public class RouteSuggestion {
 
 
 
-        vra.setMaxIterations(4096);
+        vra.setMaxIterations(4000);
 
+        vra.getAlgorithmListeners().addListener(new AlgorithmEventsRecorder(vrp,"/var/www/java/jsprit/jsprit-examples/output/sol_iter.txt"));
 //		vra.setPrematureBreak(100);
         vra.getAlgorithmListeners().addListener(new AlgorithmSearchProgressChartListener("/var/www/java/jsprit/jsprit-examples/output/sol_progress.png"));
         /*
@@ -147,7 +266,11 @@ public class RouteSuggestion {
 		/*
 		 * print solution
 		 */
-        SolutionPrinter.print(solution);
+        try {
+            SolutionPrinter.print(new PrintWriter("/var/www/java/jsprit/solution.txt"),vrp,solution, SolutionPrinter.Print.VERBOSE);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 		/*
 		 * Plot solution.

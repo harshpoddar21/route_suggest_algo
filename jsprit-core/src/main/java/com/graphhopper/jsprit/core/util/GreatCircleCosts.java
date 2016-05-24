@@ -99,7 +99,12 @@ public class GreatCircleCosts extends AbstractForwardVehicleRoutingTransportCost
             from = fromLocation.getCoordinate();
             to = toLocation.getCoordinate();
         }
+
         if (from == null || to == null) throw new NullPointerException("either from or to location is null");
+        if (fromLocation.getId().equals("19999999")){
+
+            return 0;
+        }
         return GreatCircleDistanceCalculator.calculateDistance(from, to, distanceUnit) * detour;
     }
 

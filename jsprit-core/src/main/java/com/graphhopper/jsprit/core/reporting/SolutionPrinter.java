@@ -139,7 +139,7 @@ public class SolutionPrinter {
     }
 
     private static void printVerbose(PrintWriter out, VehicleRoutingProblem problem, VehicleRoutingProblemSolution solution) {
-        String leftAlgin = "| %-7s | %-20s | %-21s | %-15s | %-15s | %-15s | %-15s |%n";
+        String leftAlgin = "| %-7s | %-20s | %-21s | %-15s | %-15s | %-15s | %-15s |%-15s |%-15s |%n";
         out.format("+--------------------------------------------------------------------------------------------------------------------------------+%n");
         out.printf("| detailed solution                                                                                                              |%n");
         out.format("+---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+%n");
@@ -149,7 +149,7 @@ public class SolutionPrinter {
             out.format("+---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+%n");
             double costs = 0;
             out.format(leftAlgin, routeNu, getVehicleString(route), route.getStart().getName(), "-", "undef", Math.round(route.getStart().getEndTime()),
-                Math.round(costs));
+                Math.round(costs),"","");
             TourActivity prevAct = route.getStart();
             for (TourActivity act : route.getActivities()) {
                 String jobId;
@@ -163,7 +163,7 @@ public class SolutionPrinter {
                 c += problem.getActivityCosts().getActivityCost(act, act.getArrTime(), route.getDriver(), route.getVehicle());
                 costs += c;
                 out.format(leftAlgin, routeNu, getVehicleString(route), act.getName(), jobId, Math.round(act.getArrTime()),
-                    Math.round(act.getEndTime()), Math.round(costs));
+                    Math.round(act.getEndTime()), Math.round(costs),act.getLocation().getCoordinate().getX(),act.getLocation().getCoordinate().getY());
                 prevAct = act;
             }
             double c = problem.getTransportCosts().getTransportCost(prevAct.getLocation(), route.getEnd().getLocation(), prevAct.getEndTime(),
@@ -171,7 +171,7 @@ public class SolutionPrinter {
             c += problem.getActivityCosts().getActivityCost(route.getEnd(), route.getEnd().getArrTime(), route.getDriver(), route.getVehicle());
             costs += c;
             out.format(leftAlgin, routeNu, getVehicleString(route), route.getEnd().getName(), "-", Math.round(route.getEnd().getArrTime()), "undef",
-                Math.round(costs));
+                Math.round(costs),"","");
             routeNu++;
         }
         out.format("+--------------------------------------------------------------------------------------------------------------------------------+%n");

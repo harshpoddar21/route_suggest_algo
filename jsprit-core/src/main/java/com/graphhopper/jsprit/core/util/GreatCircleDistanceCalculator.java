@@ -37,10 +37,10 @@ public class GreatCircleDistanceCalculator {
      * @return great circle distance
      */
     public static double calculateDistance(Coordinate coord1, Coordinate coord2, DistanceUnit distanceUnit) {
-        double lon1 = coord1.getX();
-        double lon2 = coord2.getX();
-        double lat1 = coord1.getY();
-        double lat2 = coord2.getY();
+        double lat1 = coord1.getX();
+        double lat2 = coord2.getX();
+        double lon1 = coord1.getY();
+        double lon2 = coord2.getY();
 
         double delta_Lat = Math.toRadians(lat2 - lat1);
         double delta_Lon = Math.toRadians(lon2 - lon1);

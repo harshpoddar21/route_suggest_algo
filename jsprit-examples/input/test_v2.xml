@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.w3schools.com vrp_xml_schema.xsd">
     <problemType>
-        <fleetSize>INFINITE</fleetSize>
+        <fleetSize>FINITE</fleetSize>
         <fleetComposition>HOMOGENEOUS</fleetComposition>
     </problemType>
     <vehicles>
@@ -24,6 +24,75 @@
                 <end>36400</end>
             </timeSchedule>
         </vehicle>
+        <vehicle>
+            <id>solomonVehicle2</id>
+            <typeId>solomonType</typeId>
+            <startLocation>
+                <id>19999999</id>
+                <coord x="28.573292" y="76.97702"/>
+            </startLocation>
+            <endLocation>
+                <id>29999999</id>
+                <coord x="28.4936018" y="77.0861309" />
+            </endLocation>
+
+            <timeSchedule>
+                <start>0</start>
+                <end>36400</end>
+            </timeSchedule>
+        </vehicle>
+        <vehicle>
+            <id>solomonVehicle3</id>
+            <typeId>solomonType</typeId>
+            <startLocation>
+                <id>19999999</id>
+                <coord x="28.573292" y="76.97702"/>
+            </startLocation>
+            <endLocation>
+                <id>29999999</id>
+                <coord x="28.4936018" y="77.0861309" />
+            </endLocation>
+
+            <timeSchedule>
+                <start>0</start>
+                <end>36400</end>
+            </timeSchedule>
+        </vehicle>
+        <vehicle>
+            <id>solomonVehicle4</id>
+            <typeId>solomonType</typeId>
+            <startLocation>
+                <id>19999999</id>
+                <coord x="28.573292" y="76.97702"/>
+            </startLocation>
+            <endLocation>
+                <id>29999999</id>
+                <coord x="28.4936018" y="77.0861309" />
+            </endLocation>
+
+            <timeSchedule>
+                <start>0</start>
+                <end>36400</end>
+            </timeSchedule>
+        </vehicle>
+        <vehicle>
+            <id>solomonVehicle5</id>
+            <typeId>solomonType</typeId>
+            <startLocation>
+                <id>19999999</id>
+                <coord x="28.573292" y="76.97702"/>
+            </startLocation>
+            <endLocation>
+                <id>29999999</id>
+                <coord x="28.4936018" y="77.0861309" />
+            </endLocation>
+
+            <timeSchedule>
+                <start>0</start>
+                <end>36400</end>
+            </timeSchedule>
+        </vehicle>
+
     </vehicles>
     <vehicleTypes>
         <type>
@@ -31,7 +100,7 @@
             <capacity>200</capacity>
             <costs>
                 <fixed>4400</fixed>
-                <distance>1.0</distance>
+                <distance>0.024</distance>
                 <time>0.0</time>
             </costs>
         </type>
