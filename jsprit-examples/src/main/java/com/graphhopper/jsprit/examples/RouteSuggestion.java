@@ -210,7 +210,7 @@ public class RouteSuggestion {
 
                 double detourTime=findDetourTime(prevAct,newAct,nextAct);
 
-                if (detourTime>900){
+                if (detourTime>1800){
 
                     return ConstraintsStatus.NOT_FULFILLED;
 
@@ -246,7 +246,7 @@ public class RouteSuggestion {
 
 
 
-        vra.setMaxIterations(4000);
+        vra.setMaxIterations(24000);
 
         vra.getAlgorithmListeners().addListener(new AlgorithmEventsRecorder(vrp,"/var/www/java/jsprit/jsprit-examples/output/sol_iter.txt"));
 //		vra.setPrematureBreak(100);

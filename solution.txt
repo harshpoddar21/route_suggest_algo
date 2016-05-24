@@ -13,7 +13,7 @@
 +---------------+------------------------------------------+
 | indicator     | value                                    |
 +---------------+------------------------------------------+
-| costs         | -12936.655705753563                      | 
+| costs         | -12936.655705753561                      | 
 | noVehicles    | 5                                        | 
 | unassgndJobs  | 1268                                     | 
 +----------------------------------------------------------+
@@ -22,53 +22,53 @@
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
 | route   | vehicle              | activity              | job             | arrTime         | endTime         | costs           |
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
-| 1       | solomonVehicle       | start                 | -               | undef           | 0               | 0               |                |                |
-| 1       | solomonVehicle       | pickup                | 1261            | 0               | 0               | 0               |28.6106         |77.0167         |
-| 1       | solomonVehicle       | pickup                | 1274            | 601             | 601             | 72              |28.6194         |77.0331         |
-| 1       | solomonVehicle       | pickup                | 1271            | 605             | 605             | 73              |28.6193         |77.0332         |
-| 1       | solomonVehicle       | pickup                | 1272            | 680             | 680             | 82              |28.62065        |77.03505        |
-| 1       | solomonVehicle       | end                   | -               | 5476            | undef           | 657             |                |                |
+| 1       | solomonVehicle2      | start                 | -               | undef           | 0               | 0               |                |                |
+| 1       | solomonVehicle2      | pickup                | 791             | 0               | 0               | 0               |28.6087         |77.2982         |
+| 1       | solomonVehicle2      | pickup                | 793             | 158             | 158             | 19              |28.60666        |77.2937         |
+| 1       | solomonVehicle2      | pickup                | 790             | 323             | 323             | 39              |28.6041125      |77.28930625     |
+| 1       | solomonVehicle2      | pickup                | 749             | 820             | 820             | 98              |28.6134         |77.2774333333333 |
+| 1       | solomonVehicle2      | pickup                | 748             | 990             | 990             | 119             |28.6112         |77.2726         |
+| 1       | solomonVehicle2      | pickup                | 734             | 1845            | 1845            | 221             |28.6175         |77.2462         |
+| 1       | solomonVehicle2      | end                   | -               | 8515            | undef           | 1022            |                |                |
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
-| 2       | solomonVehicle2      | start                 | -               | undef           | 0               | 0               |                |                |
-| 2       | solomonVehicle2      | pickup                | 791             | 0               | 0               | 0               |28.6087         |77.2982         |
-| 2       | solomonVehicle2      | pickup                | 793             | 158             | 158             | 19              |28.60666        |77.2937         |
-| 2       | solomonVehicle2      | pickup                | 790             | 323             | 323             | 39              |28.6041125      |77.28930625     |
-| 2       | solomonVehicle2      | pickup                | 749             | 820             | 820             | 98              |28.6134         |77.2774333333333 |
-| 2       | solomonVehicle2      | pickup                | 748             | 990             | 990             | 119             |28.6112         |77.2726         |
-| 2       | solomonVehicle2      | pickup                | 734             | 1845            | 1845            | 221             |28.6175         |77.2462         |
-| 2       | solomonVehicle2      | end                   | -               | 8515            | undef           | 1022            |                |                |
+| 2       | solomonVehicle3      | start                 | -               | undef           | 0               | 0               |                |                |
+| 2       | solomonVehicle3      | pickup                | 992             | 0               | 0               | 0               |28.7324         |77.1442         |
+| 2       | solomonVehicle3      | pickup                | 999             | 332             | 332             | 40              |28.7307         |77.13374        |
+| 2       | solomonVehicle3      | pickup                | 998             | 397             | 397             | 48              |28.7307666666667 |77.1316666666667 |
+| 2       | solomonVehicle3      | pickup                | 1027            | 611             | 611             | 73              |28.7318         |77.1249         |
+| 2       | solomonVehicle3      | pickup                | 1003            | 932             | 932             | 112             |28.7232666666667 |77.1282         |
+| 2       | solomonVehicle3      | pickup                | 1002            | 1021            | 1021            | 123             |28.7208         |77.1277         |
+| 2       | solomonVehicle3      | pickup                | 1001            | 1154            | 1154            | 138             |28.71825        |77.1246         |
+| 2       | solomonVehicle3      | pickup                | 1021            | 1523            | 1523            | 183             |28.715          |77.11335        |
+| 2       | solomonVehicle3      | pickup                | 975             | 3210            | 3210            | 385             |28.6687         |77.1019         |
+| 2       | solomonVehicle3      | end                   | -               | 9461            | undef           | 1135            |                |                |
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
-| 3       | solomonVehicle3      | start                 | -               | undef           | 0               | 0               |                |                |
-| 3       | solomonVehicle3      | pickup                | 992             | 0               | 0               | 0               |28.7324         |77.1442         |
-| 3       | solomonVehicle3      | pickup                | 999             | 332             | 332             | 40              |28.7307         |77.13374        |
-| 3       | solomonVehicle3      | pickup                | 998             | 397             | 397             | 48              |28.7307666666667 |77.1316666666667 |
-| 3       | solomonVehicle3      | pickup                | 1027            | 611             | 611             | 73              |28.7318         |77.1249         |
-| 3       | solomonVehicle3      | pickup                | 1003            | 932             | 932             | 112             |28.7232666666667 |77.1282         |
-| 3       | solomonVehicle3      | pickup                | 1002            | 1021            | 1021            | 123             |28.7208         |77.1277         |
-| 3       | solomonVehicle3      | pickup                | 1001            | 1154            | 1154            | 138             |28.71825        |77.1246         |
-| 3       | solomonVehicle3      | pickup                | 1021            | 1523            | 1523            | 183             |28.715          |77.11335        |
-| 3       | solomonVehicle3      | pickup                | 975             | 3210            | 3210            | 385             |28.6687         |77.1019         |
-| 3       | solomonVehicle3      | end                   | -               | 9461            | undef           | 1135            |                |                |
+| 3       | solomonVehicle5      | start                 | -               | undef           | 0               | 0               |                |                |
+| 3       | solomonVehicle5      | pickup                | 1249            | 0               | 0               | 0               |28.5983         |77.05445        |
+| 3       | solomonVehicle5      | pickup                | 1250            | 102             | 102             | 12              |28.5986         |77.0512         |
+| 3       | solomonVehicle5      | pickup                | 1231            | 539             | 539             | 65              |28.5961         |77.0375         |
+| 3       | solomonVehicle5      | pickup                | 1229            | 646             | 646             | 78              |28.5937666666667 |77.0396333333333 |
+| 3       | solomonVehicle5      | pickup                | 1237            | 857             | 857             | 103             |28.5921         |77.0461         |
+| 3       | solomonVehicle5      | pickup                | 1208            | 1316            | 1316            | 158             |28.5849         |77.0583         |
+| 3       | solomonVehicle5      | end                   | -               | 4680            | undef           | 562             |                |                |
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
-| 4       | solomonVehicle5      | start                 | -               | undef           | 0               | 0               |                |                |
-| 4       | solomonVehicle5      | pickup                | 1249            | 0               | 0               | 0               |28.5983         |77.05445        |
-| 4       | solomonVehicle5      | pickup                | 1250            | 102             | 102             | 12              |28.5986         |77.0512         |
-| 4       | solomonVehicle5      | pickup                | 1231            | 539             | 539             | 65              |28.5961         |77.0375         |
-| 4       | solomonVehicle5      | pickup                | 1229            | 646             | 646             | 78              |28.5937666666667 |77.0396333333333 |
-| 4       | solomonVehicle5      | pickup                | 1237            | 857             | 857             | 103             |28.5921         |77.0461         |
-| 4       | solomonVehicle5      | pickup                | 1208            | 1316            | 1316            | 158             |28.5849         |77.0583         |
-| 4       | solomonVehicle5      | end                   | -               | 4680            | undef           | 562             |                |                |
+| 4       | solomonVehicle4      | start                 | -               | undef           | 0               | 0               |                |                |
+| 4       | solomonVehicle4      | pickup                | 836             | 0               | 0               | 0               |28.6610666666667 |77.3148666666667 |
+| 4       | solomonVehicle4      | pickup                | 837             | 225             | 225             | 27              |28.65895        |77.32165        |
+| 4       | solomonVehicle4      | pickup                | 835             | 704             | 704             | 84              |28.6456         |77.32355        |
+| 4       | solomonVehicle4      | pickup                | 832             | 977             | 977             | 117             |28.64856        |77.31548        |
+| 4       | solomonVehicle4      | pickup                | 833             | 1114            | 1114            | 134             |28.6505         |77.3117         |
+| 4       | solomonVehicle4      | pickup                | 768             | 1623            | 1623            | 195             |28.6421         |77.2985         |
+| 4       | solomonVehicle4      | pickup                | 769             | 1899            | 1899            | 228             |28.6361666666667 |77.2928333333333 |
+| 4       | solomonVehicle4      | pickup                | 781             | 2461            | 2461            | 295             |28.636644       |77.274852       |
+| 4       | solomonVehicle4      | end                   | -               | 10253           | undef           | 1230            |                |                |
 +---------+----------------------+-----------------------+-----------------+-----------------+-----------------+-----------------+
-| 5       | solomonVehicle4      | start                 | -               | undef           | 0               | 0               |                |                |
-| 5       | solomonVehicle4      | pickup                | 836             | 0               | 0               | 0               |28.6610666666667 |77.3148666666667 |
-| 5       | solomonVehicle4      | pickup                | 837             | 225             | 225             | 27              |28.65895        |77.32165        |
-| 5       | solomonVehicle4      | pickup                | 835             | 704             | 704             | 84              |28.6456         |77.32355        |
-| 5       | solomonVehicle4      | pickup                | 832             | 977             | 977             | 117             |28.64856        |77.31548        |
-| 5       | solomonVehicle4      | pickup                | 833             | 1114            | 1114            | 134             |28.6505         |77.3117         |
-| 5       | solomonVehicle4      | pickup                | 768             | 1623            | 1623            | 195             |28.6421         |77.2985         |
-| 5       | solomonVehicle4      | pickup                | 769             | 1899            | 1899            | 228             |28.6361666666667 |77.2928333333333 |
-| 5       | solomonVehicle4      | pickup                | 781             | 2461            | 2461            | 295             |28.636644       |77.274852       |
-| 5       | solomonVehicle4      | end                   | -               | 10253           | undef           | 1230            |                |                |
+| 5       | solomonVehicle       | start                 | -               | undef           | 0               | 0               |                |                |
+| 5       | solomonVehicle       | pickup                | 1261            | 0               | 0               | 0               |28.6106         |77.0167         |
+| 5       | solomonVehicle       | pickup                | 1274            | 601             | 601             | 72              |28.6194         |77.0331         |
+| 5       | solomonVehicle       | pickup                | 1271            | 605             | 605             | 73              |28.6193         |77.0332         |
+| 5       | solomonVehicle       | pickup                | 1272            | 680             | 680             | 82              |28.62065        |77.03505        |
+| 5       | solomonVehicle       | end                   | -               | 5476            | undef           | 657             |                |                |
 +--------------------------------------------------------------------------------------------------------------------------------+
 +----------------+
 | unassignedJobs |
